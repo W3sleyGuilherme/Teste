@@ -1,11 +1,13 @@
 const apiKey = '922e6b25270e6acdb773569632699500';
 
-document.getElementById('send-btn').addEventListener('click', () => {
+document.getElementById('input-form').addEventListener('submit', (e) => {
+  e.preventDefault();
   const input = document.getElementById('city-input');
   const city = input.value.trim();
   if (!city) return;
   addUserMessage(city);
   fetchWeather(city);
+  updateHistory(city);
   input.value = '';
 });
 
@@ -28,7 +30,7 @@ function addBotMessage(text) {
 }
 
 async function fetchWeather(city) {
-  addBotMessage('Consultando o tempo em ' + city + '...');
+  addBotMessage(`⏳ Consultando o tempo em ${city}...`);
   try {
     const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&lang=pt_br&appid=${apiKey}`);
     if (!res.ok) throw new Error('Cidade não encontrada.');
@@ -36,9 +38,9 @@ async function fetchWeather(city) {
     const weather = data.weather[0].description;
     const temp = data.main.temp;
     const emoji = getWeatherEmoji(weather);
-    addBotMessage(`Em ${data.name} está ${weather}, com ${temp}°C ${emoji}`);
+    addBotMessage(`📍 Em ${data.name} está ${weather}, com ${temp}°C ${emoji}`);
   } catch (err) {
-    addBotMessage('Ops... ' + err.message);
+    addBotMessage('❌ ' + err.message);
   }
 }
 
@@ -49,4 +51,16 @@ function getWeatherEmoji(description) {
   if (d.includes('chuva')) return '🌧️';
   if (d.includes('neve')) return '❄️';
   return '🌡️';
+}
+
+function updateHistory(city) {
+  const history = document.getElementById('history');
+  const item = document.createElement('div');
+  item.className = 'history-item';
+  item.textContent = city;
+  item.onclick = () => {
+    addUserMessage(city);
+    fetchWeather(city);
+  };
+  history.prepend(item);
 }

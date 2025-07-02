@@ -1,19 +1,27 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Previsão do Tempo - Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="chat-container">
-    <div id="chat-box" class="chat-box">
-      <div class="bot-message">Olá! Me diga o nome de uma cidade e eu te conto o tempo por lá 😉</div>
-    </div>
-    <div class="input-area">
-      <input type="text" id="city-input" placeholder="Digite o nome da cidade..." />
-      <button id="send-btn">Enviar</button>
-    </div>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Histórico</h2>
+      <div id="history" class="history"></div>
+    </aside>
+    <main class="main">
+      <div id="chat-box" class="chat-box">
+        <div class="bot-message">🌤️ Olá! Me diga o nome de uma cidade e eu te conto o tempo por lá.</div>
+      </div>
+      <form id="input-form" class="input-area">
+        <input type="text" id="city-input" placeholder="Digite o nome da cidade..." required />
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
   </div>
   <script src="script.js"></script>
 </body>
