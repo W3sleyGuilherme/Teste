@@ -1,28 +1,53 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Previsão do Tempo - Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clima Agora</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <aside class="sidebar">
-      <h2>Histórico</h2>
-      <div id="history" class="history"></div>
-    </aside>
-    <main class="main">
-      <div id="chat-box" class="chat-box">
-        <div class="bot-message">🌤️ Olá! Me diga o nome de uma cidade e eu te conto o tempo por lá.</div>
+    <header>
+      <h1>☀️ Clima Agora</h1>
+      <div class="search">
+        <input type="text" id="city-input" placeholder="Digite uma cidade...">
+        <button id="search-btn">Buscar</button>
       </div>
-      <form id="input-form" class="input-area">
-        <input type="text" id="city-input" placeholder="Digite o nome da cidade..." required />
-        <button type="submit">Enviar</button>
-      </form>
-    </main>
+      <h2 id="city-name">Carregando localização...</h2>
+    </header>
+
+    <section class="current-weather">
+      <img id="weather-icon" src="" alt="Icone clima atual">
+      <div class="info">
+        <h1 id="temp">--°C</h1>
+        <p id="desc">Carregando...</p>
+        <p id="advice">--</p>
+      </div>
+      <div class="details">
+        <p>💨 Vento: <span id="wind">-- km/h</span></p>
+        <p>💧 Umidade: <span id="humidity">--%</span></p>
+        <p>☁️ Nuvens: <span id="clouds">--%</span></p>
+      </div>
+    </section>
+
+    <section class="forecast">
+      <h3>Próximos 7 Dias</h3>
+      <div class="daily" id="daily"></div>
+    </section>
+
+    <section class="hourly-forecast" id="hourly-section" style="display:none">
+      <h3 id="day-title">Detalhes do Dia</h3>
+      <div class="hourly" id="hourly-details"></div>
+    </section>
+
+    <section class="mapa">
+      <h3>🌡️ Mapa de Calor</h3>
+      <iframe id="heatmap" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen></iframe>
+    </section>
   </div>
-  <script src="script.js"></script>
 </body>
 </html>
